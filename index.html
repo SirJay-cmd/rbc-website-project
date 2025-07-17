@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ruaraka Baptist Church</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Updated to match RBC logo: deep blue, gold/yellow, white, and a touch of red */
+      --primary-color: #002060; /* Deep blue from logo */
+      --accent-color: #ffd700; /* Gold/yellow from logo */
+      --light-bg: #ffffff; /* White */
+      --dark-bg: #1a1a1a; /* Deep dark for contrast */
+      --text-color: #002060; /* Deep blue for text */
+      --rbc-red: #c8102e; /* Red accent from logo */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--light-bg) 0%, #e6eaf5 100%);
+      color: var(--text-color);
+      min-height: 100vh;
+      overflow-x: hidden;
+      animation: bodyFadeIn 1.2s ease;
+    }
+
+    @keyframes bodyFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      background: linear-gradient(90deg, var(--primary-color) 60%, var(--rbc-red) 100%);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: slideDown 1s cubic-bezier(.77,0,.18,1);
+      gap: 1.5rem;
+      transition: opacity 0.5s cubic-bezier(.77,0,.18,1);
+    }
+    header.fade-out {
+      opacity: 0.3;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-60px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo img {
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      transition: transform 0.3s;
+    }
+    .logo img:hover {
+      transform: scale(1.08) rotate(-3deg);
+    }
+
+    .logo h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin: 0;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(44,62,80,0.10);
+      transition: opacity 0.5s cubic-bezier(.77,0,.18,1);
+      animation: floatHeading 3s ease-in-out infinite alternate;
+    }
+    @keyframes floatHeading {
+      0% { transform: translateY(0); letter-spacing: 2px; }
+      50% { transform: translateY(-8px) scale(1.04) rotate(-1deg); letter-spacing: 4px; }
+      100% { transform: translateY(0); letter-spacing: 2px; }
+    }
+    .logo h1.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    nav a {
+      color: var(--accent-color);
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      transition: color 0.3s, transform 0.3s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+    }
+    nav a:hover {
+      color: var(--rbc-red);
+      transform: scale(1.08);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 350px;
+      margin: 2rem auto 0 auto;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,32,96,0.18);
+      background: url('rbctheme.jpg') top center/cover no-repeat;
+      animation: heroFadeIn 1.2s cubic-bezier(.77,0,.18,1);
+    }
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+      animation: sectionFadeIn 1.2s cubic-bezier(.77,0,.18,1);
+    }
+    @keyframes sectionFadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ministries {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .ministry {
+      background: rgba(255,255,255,0.85);
+      padding: 1.5rem 1rem;
+      border-left: 5px solid var(--rbc-red);
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+      transition: transform 0.4s cubic-bezier(.77,0,.18,1), box-shadow 0.4s;
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+      animation: cardFadeIn 1.2s cubic-bezier(.77,0,.18,1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
+    }
+    .ministry-action {
+      display: inline-block;
+      margin-top: 1rem;
+      background: var(--accent-color);
+      color: #222;
+      padding: 0.5rem 1.2rem;
+      border-radius: 24px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(250,204,21,0.10);
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      align-self: flex-start;
+    }
+    .ministry-action:hover {
+      background: #ffe066;
+      color: var(--primary-color);
+      transform: scale(1.08);
+    }
+    .ministry:hover {
+      transform: translateY(-10px) scale(1.03) rotate(-1deg);
+      box-shadow: 0 8px 32px rgba(200,16,46,0.18);
+      background: rgba(255,215,0,0.12);
+    }
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .ministry h2 {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+    }
+
+    .video-section iframe {
+      width: 100%;
+      height: 450px;
+      border-radius: 18px;
+      border: none;
+      box-shadow: 0 4px 24px rgba(44,62,80,0.10);
+      transition: box-shadow 0.3s;
+    }
+    .video-section iframe:hover {
+      box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05) rotate(-2deg);
+      box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+    }
+
+    .socials {
+      background: linear-gradient(90deg, var(--primary-color) 60%, var(--rbc-red) 100%);
+      color: #fff;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 -4px 24px rgba(44,62,80,0.10);
+      margin-top: 3rem;
+      animation: sectionFadeIn 1.2s cubic-bezier(.77,0,.18,1);
+    }
+
+    .socials h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .social-icons a {
+      margin: 0 1rem;
+      display: inline-block;
+      font-size: 2rem;
+      color: var(--rbc-red);
+      text-decoration: none;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .social-icons a:hover {
+      color: var(--accent-color);
+      transform: scale(1.2) rotate(-5deg);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: linear-gradient(90deg, var(--primary-color) 60%, var(--rbc-red) 100%);
+      color: var(--accent-color);
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 -2px 12px rgba(0,32,96,0.10);
+      animation: sectionFadeIn 1.2s cubic-bezier(.77,0,.18,1);
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.15);
+      border-radius: 24px;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+      padding: 0.2rem 0.7rem;
+      transition: box-shadow 0.3s;
+      margin: 0 1rem;
+    }
+    .search-bar input {
+      border: none;
+      background: transparent;
+      outline: none;
+      color: #222;
+      font-size: 1rem;
+      padding: 0.5rem 0.7rem;
+      width: 180px;
+      border-radius: 24px 0 0 24px;
+    }
+    .search-bar button {
+      background: var(--accent-color);
+      border: none;
+      border-radius: 0 24px 24px 0;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
+    .search-bar button:hover {
+      background: #ffe066;
+    }
+    .cta-btn {
+      background: var(--rbc-red);
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 24px;
+      font-weight: bold;
+      margin-left: 1rem;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      box-shadow: 0 2px 8px rgba(250,204,21,0.10);
+    }
+    .cta-btn:hover {
+      background: var(--accent-color);
+      color: var(--primary-color);
+      transform: scale(1.08);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: #fff;
+      padding: 2rem 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+      animation: sectionFadeIn 1.2s cubic-bezier(.77,0,.18,1);
+    }
+    .hero-cta {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background: var(--accent-color);
+      color: #222;
+      padding: 0.7rem 2rem;
+      border-radius: 24px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(250,204,21,0.10);
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+    }
+    .hero-cta:hover {
+      background: #ffe066;
+      color: var(--primary-color);
+      transform: scale(1.08);
+    }
+    .footer-columns {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto 1rem auto;
+      padding: 2rem 0 0 0;
+      flex-wrap: wrap;
+    }
+    .footer-columns div {
+      min-width: 160px;
+    }
+    .footer-columns h4 {
+      margin-bottom: 0.7rem;
+      color: var(--accent-color);
+      font-size: 1.1rem;
+    }
+    .footer-columns a, .footer-columns span {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 0.3rem;
+      transition: color 0.3s;
+    }
+    .footer-columns a:hover {
+      color: var(--accent-color);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding: 1rem 0 0.5rem 0;
+      color: var(--accent-color);
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 -2px 12px rgba(44,62,80,0.10);
+      animation: sectionFadeIn 1.2s cubic-bezier(.77,0,.18,1);
+    }
+    @media (max-width: 900px) {
+      .footer-columns {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    @media (max-width: 700px) {
+      header, section, .hero, .socials, footer {
+        padding: 1.2rem 0.5rem;
+      }
+      .hero {
+        min-height: 220px;
+      }
+      .video-section iframe {
+        height: 220px;
+      }
+      .footer-columns {
+        padding: 1rem 0 0 0;
+      }
+      .search-bar input {
+        width: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="RBCLOGO.jpg" alt="Church Logo">
+      <h1>Ruaraka Baptist Church</h1>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#ministries">Ministries</a>
+      <a href="#video">Live</a>
+      <a href="#socials">Socials</a>
+      <a href="#" class="cta-btn">Join Us</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <xprowth. Join us for worship, fellowship, and service.</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Ruaraka Baptist Church has been a beacon of hope, love, and faith for decades. Our mission is to share the love of Christ and make disciples through worship, service, and outreach.</p>
+  </section>
+
+  <section id="ministries">
+    <h2>Our Ministries</h2>
+    <div class="ministries">
+      <div class="ministry">
+        <div class="ministry-content">
+          Children Ministry  
+          <h2>"Growing Hearts for Jesus!"</h2>     
+          <p>At Ruaraka Baptist Church, our Children’s Ministry is a vibrant, joyful space where kids learn about God's love in fun and meaningful ways. Through Bible stories, music, crafts, and interactive lessons, we help children build a strong foundation of faith. Our goal is to partner with families to raise up the next generation of Christ-followers in a safe, nurturing, and exciting environment.</p>
+        </div>
+      </div>
+
+      <div class="ministry">
+<h2>"Real Faith. Real Life. Real Connection."</h2>
+<p>Our Youth Ministry is a place for middle and high school students to explore their faith, build lasting friendships, and discover their purpose in Christ. We meet regularly for worship, teaching, small groups, and events that challenge and inspire. We’re raising leaders who live boldly for Jesus in their schools, homes, and communities.</p>
+
+      </div>
+    
+
+    <div class="ministry">
+<h2>"Rooted in Christ. Growing Together."</h2>
+<p>Our Women’s Ministry is a space where women of all ages can connect, grow in faith, and encourage one another. Through Bible studies, retreats, prayer gatherings, and outreach, we support each other in every season of life. Come as you are and find a sisterhood rooted in love, grace, and purpose.</p>
+    </div> 
+
+      <div class="ministry">
+<h2>"Strong Faith. Strong Brotherhood."</h2>
+<p>We believe men thrive when they grow in faith alongside other men. Our Men’s Ministry is about discipleship, accountability, and leadership. Whether it's through Bible studies, breakfasts, service projects, or mentoring, we’re building a band of brothers who seek to honor God in their families, work, and communities.</p>
+
+
+
+      </div>
+
+      <div class="ministry">
+<h2>"Worshiping God. Leading Others."</h2>
+<p>Our Worship Ministry exists to glorify God through music and creative expression. Whether you're a musician, vocalist, or have a passion for tech and production, there's a place for you to serve. Together, we lead our church into meaningful encounters with God, creating an atmosphere where hearts are transformed in His presence.</p>
+
+      </div>
+
+      <div class="ministry">
+<h2>"Love in Action."</h2>
+<p>We are committed to being the hands and feet of Jesus in our community. Through food drives, service projects, partnerships with local organizations, and more, our Outreach Ministry seeks to meet needs and share the hope of Christ. Everyone has something to give—come join us in making a difference!</p>
+
+
+
+      </div>
+
+    </div>
+  </section>
+
+  
+
+  <section id="video" class="video-section">
+    <h2>Visit Our Youtube Channel.</h2>
+<p>We are live every Wednesday for the midweek service.</p>
+<p>We are also live on Sundays where the first service starts from 9:00am to 10:45am </p>
+<p>We are also live for the second service and it starts from 11:20 to 1pm</p>
+
+
+<h3>Ruaraka Baptist Church kesha's.</h3>
+<p>We usually have a kesha every First Friday of the month. </p>
+<p>It is also streamed live on our Youtube Channel.</p>
+
+
+    <iframe src="https://www.youtube.com/embed/Fb9h0c4DCtI" allowfullscreen title="Sermon Video"></iframe>
+  </section>
+
+  <section id="socials" class="socials">
+    <h2>Follow Us Online</h2>
+    <p>Stay connected with us on our social platforms for more updates:</p>
+    <div class="social-icons">
+      <a href="https://facebook.com/RuarakaBaptistChurch" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/ruarakabaptistchurch/?hl=en" target="_blank">Instagram</a>
+      <a href="https://youtube.com/@RuarakaBaptistChurch" target="_blank">YouTube</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-columns">
+      <div>
+        <h4>About</h4>
+        <a href="#ministries">Ministries</a><br>
+        <a href="#video">Live</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#socials">Socials</a><br>
+        <a href="mailto:info@ruarakabaptist.org">Email Us</a>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <span>Ruaraka, Nairobi, Kenya</span><br>
+        <span>Sun: 9am & 11:20am</span>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Ruaraka Baptist Church. All rights reserved.</div>
+  </footer>
+
+</body>
+<script>
+  // Fade out the entire header on scroll
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (!header) return;
+    if (window.scrollY > 60) {
+      header.classList.add('fade-out');
+    } else {
+      header.classList.remove('fade-out');
+    }
+  });
+</script>
+</html>
