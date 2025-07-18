@@ -17,6 +17,7 @@ app.use(express.json());
 // Connect to MongoDB
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
+
 const uri = "mongodb+srv://peterrjason:<ns3@sonsv9>@jaydev.8q9n9ps.mongodb.net/?retryWrites=true&w=majority&appName=jaydev";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
