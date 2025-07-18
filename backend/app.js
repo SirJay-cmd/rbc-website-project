@@ -17,6 +17,18 @@ app.use(express.json());
 // Connect to MongoDB
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
+const mongoose = require('mongoose');
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected ✅'))
+.catch((err) => console.error('MongoDB connection error ❌:', err));
+
+;
+
 
 const uri = "mongodb+srv://peterrjason:<ns3@sonsv9>@jaydev.8q9n9ps.mongodb.net/?retryWrites=true&w=majority&appName=jaydev";
 
