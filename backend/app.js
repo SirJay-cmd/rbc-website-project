@@ -18,6 +18,7 @@ app.use(express.json());
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const mongoose = require('mongoose');
+
 const mongoURI = process.env.MONGO_URI;
 
 mongoose.connect(mongoURI, {
